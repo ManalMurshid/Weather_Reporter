@@ -18,6 +18,13 @@ const Weather = () => {
     
     const inputRef= useRef();
     const [weatherData, setWeatherData] = useState(false);
+    const [message, setMessage] = useState(""); // for inline feedback
+    const [cityInput, setCityInput] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    
+
+
+
 
     const allIcons ={
         "01d":clear_icon,
@@ -38,18 +45,47 @@ const Weather = () => {
     }
 
 
-    const search=async (city)=>{
-        if (city === ""){
-            alert("Please enter a city name");
-            return;
+  const fetchCitySuggestions = async (query) => {
+  const url = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=5&namePrefix=${query}`;
 
-        }
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'X-RapidAPI-Key': import.meta.env.VITE_GEODB_API_KEY,
+        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+      }
+    });
+    const data = await response.json();
+    const cities = data.data.map(city => city.city);
+    setSuggestions(cities);
+  } catch (error) {
+    console.error("Failed to fetch city suggestions:", error);
+    setSuggestions([]);
+  }
+};
+
+
+const search = async (city) => {
+      if (city.trim() === "") {
+        setMessage("Please enter a city name");
+        setWeatherData(false); // Hide previous data if any
+        return;
+      }
+
+         setMessage(""); 
         try {
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
 
             const response = await fetch(url);
             const data = await response.json();
             
+            if (data.cod !== 200) {
+              setMessage("City not found. Please try another one");
+              setWeatherData(false);
+              return;
+            }
+
+
             console.log(data);
             const icon = allIcons[data.weather[0].icon] || clear_icon;
             setWeatherData({
@@ -62,7 +98,7 @@ const Weather = () => {
             })
 
         } catch (error) {
-            setWeatherData(false);
+            setMessage("Something went wrong. Please try again later.");
             console.error('Error fetching weather data:', error);
          }
     }
@@ -76,16 +112,45 @@ const Weather = () => {
         type="text" 
         placeholder="Search"
 
+
+        //To display suggestions 
+
+        value={cityInput}
+          onChange={(e) => {
+            const value = e.target.value;
+            setCityInput(value);
+            if (value.length > 2) {
+              fetchCitySuggestions(value);
+            } else {
+              setSuggestions([]);
+            }
+          }}
+
         //To use the enter key on keyboard 
         onKeyDown={(e) => {
-      if (e.key === 'Enter') {
-        search(inputRef.current.value);
-      }
-    }}
+          if (e.key === 'Enter') {
+            search(cityInput);
+            setSuggestions([]);
+          }
+        }}
      />
         <button><img src={searchIcon} alt="Search" className="search-icon" onClick={()=>search(inputRef.current.value)}/> </button>
       </div>
-      
+
+      {message && <p className="message">{message}</p>}
+
+      <ul className="suggestions">
+        {suggestions.map((city, index) => (
+          <li key={index} onClick={() => {
+            setCityInput(city);
+            search(city);
+            setSuggestions([]);
+          }}>
+            {city}
+          </li>
+        ))}
+      </ul>
+
       
       {/* To display only if weather data is available */}
       {weatherData?<>

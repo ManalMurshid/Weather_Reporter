@@ -82,3 +82,99 @@
   width: 40px;
   height: 40px;
 }
+
+.suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  width: 30%;
+  background: #dce1de;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  color: #333;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+.suggestions li:last-child {
+  border-bottom: none;
+}
+
+
+
+/* overrides default styles only on devices with width 480px or less */
+@media screen and (max-width: 480px) {
+  .weather {
+    width: 90%;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .search-bar {
+    flex-direction: row;
+    padding: 5px;
+  }
+
+  .search-bar input {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .search-bar button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .main-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .weather-info h2 {
+    font-size: 26px;
+  }
+
+  .weather-info h3 {
+    font-size: 16px;
+  }
+
+  .weather-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .stat {
+    font-size: 13px;
+  }
+
+  .uv-index {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .uv-index img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .suggestions {
+    max-height: 120px;
+    font-size: 12px;
+  }
+
+  .suggestions li {
+    padding: 8px;
+  }
+}
