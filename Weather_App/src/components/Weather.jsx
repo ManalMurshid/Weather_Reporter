@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'; 
 
 import './Weather.css';
+import Spinner from './Spinner';
 import uvIcon from '../assets/uv.png';         // local UV icon (optional)
 import searchIcon from '../assets/search.png';
 import HumidityIcon from '../assets/humidity.png';
@@ -21,11 +22,8 @@ const Weather = () => {
     const [message, setMessage] = useState(""); // for inline feedback
     const [cityInput, setCityInput] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [loading, setLoading] = useState(false);
     
-
-
-
-
     const allIcons ={
         "01d":clear_icon,
         "01n":clear_icon,
@@ -65,43 +63,95 @@ const Weather = () => {
 };
 
 
+// const search = async (city) => {
+//       if (city.trim() === "") {
+//         setMessage("Please enter a city name");
+//         setWeatherData(false); // Hide previous data if any
+//         return;
+//       }
+
+//          setMessage(""); 
+//          setLoading(true);
+//          setWeatherData(false); // hide any previous weather data
+
+
+
+//         try {
+//             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
+
+//             const response = await fetch(url);
+//             const data = await response.json();
+            
+//             if (data.cod !== 200) {
+//               setMessage("City not found. Please try another one");
+//               setWeatherData(false);
+//               return;
+//             }
+
+
+//             console.log(data);
+//             const icon = allIcons[data.weather[0].icon] || clear_icon;
+//             setWeatherData({
+//                 humidity: data.main.humidity,
+//                 windspeed: data.wind.speed,
+//                 temperature: Math.floor(data.main.temp),
+//                 location: data.name,
+//                 icon:icon,
+                
+//             })
+
+//         } catch (error) {
+//             setMessage("Something went wrong. Please try again later.");
+//             setWeatherData(false);
+//             console.error('Error fetching weather data:', error);
+//          }
+
+//          setLoading(false); 
+//     }
+
+
 const search = async (city) => {
-      if (city.trim() === "") {
-        setMessage("Please enter a city name");
-        setWeatherData(false); // Hide previous data if any
+  setLoading(true); // Start spinner immediately
+  setWeatherData(false); // Hide any previous data
+  setMessage(""); // Clear old messages
+
+  
+  setTimeout(async () => {
+    if (city.trim() === "") {
+      setMessage("Please enter a city name");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.cod !== 200) {
+        setMessage("City not found. Please try another one");
+        setLoading(false);
         return;
       }
 
-         setMessage(""); 
-        try {
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
+      const icon = allIcons[data.weather[0].icon] || clear_icon;
 
-            const response = await fetch(url);
-            const data = await response.json();
-            
-            if (data.cod !== 200) {
-              setMessage("City not found. Please try another one");
-              setWeatherData(false);
-              return;
-            }
-
-
-            console.log(data);
-            const icon = allIcons[data.weather[0].icon] || clear_icon;
-            setWeatherData({
-                humidity: data.main.humidity,
-                windspeed: data.wind.speed,
-                temperature: Math.floor(data.main.temp),
-                location: data.name,
-                icon:icon,
-                
-            })
-
-        } catch (error) {
-            setMessage("Something went wrong. Please try again later.");
-            console.error('Error fetching weather data:', error);
-         }
+      setWeatherData({
+        humidity: data.main.humidity,
+        windspeed: data.wind.speed,
+        temperature: Math.floor(data.main.temp),
+        location: data.name,
+        icon: icon,
+      });
+    } catch (error) {
+      setMessage("Something went wrong. Please try again later.");
+      console.error("Error fetching weather data:", error);
     }
+
+    setLoading(false); // End spinner after everything
+  }, 1000);
+};
+
 
     
   return (
@@ -151,6 +201,9 @@ const search = async (city) => {
         ))}
       </ul>
 
+      
+      {/* Show spinner when loading */}
+      {loading && <Spinner />}
       
       {/* To display only if weather data is available */}
       {weatherData?<>
