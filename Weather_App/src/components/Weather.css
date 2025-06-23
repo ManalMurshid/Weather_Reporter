@@ -1,10 +1,7 @@
 .weather {
   place-self: center;
   padding: 40px;
-  /* width: 350px; */
-  width: 100%;
-  max-width: 350px;
-  
+  width: 350px;
   border-radius: 10px;
   background-image: linear-gradient(45deg, #35829d, #35829d);
   color: white;
