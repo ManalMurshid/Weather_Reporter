@@ -7,11 +7,10 @@ A simple React weather application that lets you search for cities, view current
 - Search for any city and get real-time weather data
 - Autocomplete city suggestions
 - Displays temperature, humidity, wind speed, and UV index
-- Responsive and modern UI
+- Responsive UI
 
 ## Screenshots
-
-![App Screenshot]("Weather_App/src/assets/weather app design.png")
+![App screen shot](https://github.com/ManalMurshid/Weather_Reporter/blob/main/Weather_App/src/assets/weather%20app%20design.png) 
 
 The design was first created using Canva to visualize layout and structure.
 
