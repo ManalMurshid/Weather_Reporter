@@ -10,7 +10,7 @@ A simple React weather application that lets you search for cities, view current
 - Responsive UI
 
 ## Screenshots
-![App screen shot](https://github.com/ManalMurshid/Weather_Reporter/blob/main/Weather_App/src/assets/weather%20app%20design.png) 
+![App screen shot](https://github.com/ManalMurshid/Weather_Reporter/blob/main/Weather_App/src/assets/Screenshot%20website.png) 
 
 The design was first created using Canva to visualize layout and structure.
 
