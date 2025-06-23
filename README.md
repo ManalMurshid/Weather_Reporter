@@ -11,7 +11,7 @@ A simple React weather application that lets you search for cities, view current
 
 ## Screenshots
 
-![App Screenshot](Weather_App/src/assets/weather app design.png)
+![App Screenshot]("Weather_App/src/assets/weather app design.png")
 
 The design was first created using Canva to visualize layout and structure.
 
