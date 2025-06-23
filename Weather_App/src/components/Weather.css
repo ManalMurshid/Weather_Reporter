@@ -1,7 +1,10 @@
 .weather {
   place-self: center;
   padding: 40px;
-  width: 350px;
+  /* width: 350px; */
+  width: 100%;
+  max-width: 350px;
+  
   border-radius: 10px;
   background-image: linear-gradient(45deg, #35829d, #35829d);
   color: white;
@@ -166,24 +169,30 @@
 /* Responsive styles for mobile */
 @media screen and (max-width: 480px) {
   .weather {
-    width: 90%;
-    padding: 20px;
+    width: 100%;
+    max-width: 100vw;
+    padding: 10px;
     border-radius: 8px;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .searchbar-dropdown-container {
     width: 100%;
+    min-width: 0;
   }
 
   .search-bar {
     flex-direction: row;
     padding: 5px;
     width: 100%;
+    min-width: 0;
   }
 
   .search-bar input {
     font-size: 12px;
     padding: 8px;
+    min-width: 0;
   }
 
   .search-bar button {
@@ -224,11 +233,14 @@
   }
 
   .suggestions {
-    max-width: 100%;
-    width: 100%;
+    max-width: 100vw;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 13px;
     margin: 4px 0 0 0;
     border-radius: 8px;
+    box-sizing: border-box;
   }
 
   .suggestions li {
