@@ -22,7 +22,7 @@ export const ICONS = {
 };
 
 export const getGeoUrl = (query, appId) =>
-  `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${appId}`;
+  `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${appId}`;
 
 export const getWeatherUrl = (city, appId) =>
   `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${appId}`;
