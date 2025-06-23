@@ -53,6 +53,14 @@
   min-height: 40px;
 }
 
+.search-bar button img,
+.search-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
+
 .main-icon {
   width: 80px;
   height: 80px;
@@ -200,9 +208,16 @@
   .search-bar button {
     padding: 8px;
     font-size: 14px;
-    
+
     min-width: 36px;
     min-height: 36px;
+  }
+
+
+  .search-bar button img,
+  .search-icon {
+    width: 18px;
+    height: 18px;
   }
 
   .main-icon {
