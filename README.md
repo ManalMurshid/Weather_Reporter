@@ -11,7 +11,7 @@ A simple React weather application that lets you search for cities, view current
 
 ## Screenshots
 
-![App Screenshot](src/assets/weather%20app%20design.png)
+![App Screenshot](src/assets/weather app design.png)
 
 The design was first created using Canva to visualize layout and structure.
 
@@ -59,15 +59,6 @@ Open in your browser.
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
 - [OpenWeatherMap API](https://openweathermap.org/api)
-
-## License
-
-[MIT](LICENSE)
-### 📋 Wireframe Design
-
-The design was first created using Canva to visualize layout and structure.
-
-[The wireframe design on Canva](https://www.canva.com/design/DAGqwejdjTk/HgOeiCwC--zqiR2IP-pkVQ/edit?utm_content=DAGqwejdjTk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 
 
