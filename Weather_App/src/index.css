@@ -12,7 +12,7 @@
   min-height: 100vh;
   display: grid;
   background: #e2d4ff;
-  background-image: url('src/assets/bg_image.jpg');
+  background-image: url('/bg_image.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
