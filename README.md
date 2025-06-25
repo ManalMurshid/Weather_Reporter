@@ -2,6 +2,9 @@
 
 A simple React weather application that lets you search for cities, view current weather, humidity, wind speed, and UV index, with autocomplete suggestions.
 
+Check out the deployed app here:  
+🔗 [https://weather-reporter-git-main-manal-murshids-projects.vercel.app/](https://weather-reporter-git-main-manal-murshids-projects.vercel.app/)
+
 ## Features
 
 - Search for any city and get real-time weather data
